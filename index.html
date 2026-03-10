@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Universe</title>
+
+<style>
+body {
+    margin:0;
+    background:black;
+    color:white;
+    font-family:Arial;
+}
+
+header{
+    position:fixed;
+    top:0;
+    width:100%;
+    padding:15px;
+    background:rgba(0,0,0,0.6);
+    backdrop-filter:blur(5px);
+}
+
+header a{
+    color:white;
+    margin-right:20px;
+    text-decoration:none;
+    font-size:14px;
+}
+
+#space{
+    width:100vw;
+    height:100vh;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<a href="#">Главная</a>
+<a href="#">Обо мне</a>
+<a href="#">Тексты</a>
+</header>
+
+<canvas id="space"></canvas>
+
+<script>
+
+const canvas = document.getElementById("space");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let stars = [];
+
+for(let i=0;i<120;i++){
+
+    stars.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        size:Math.random()*2
+    });
+
+}
+
+function draw(){
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    ctx.fillStyle="white";
+
+    for(let star of stars){
+
+        ctx.beginPath();
+        ctx.arc(star.x,star.y,star.size,0,Math.PI*2);
+        ctx.fill();
+
+    }
+
+    requestAnimationFrame(draw);
+}
+
+draw();
+
+</script>
+
+</body>
+</html>
